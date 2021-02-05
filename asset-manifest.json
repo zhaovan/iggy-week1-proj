@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/iggy-week1-proj/static/css/main.1ea95623.chunk.css",
+    "main.js": "/iggy-week1-proj/static/js/main.2dfd9d57.chunk.js",
+    "main.js.map": "/iggy-week1-proj/static/js/main.2dfd9d57.chunk.js.map",
+    "runtime-main.js": "/iggy-week1-proj/static/js/runtime-main.7528d1cf.js",
+    "runtime-main.js.map": "/iggy-week1-proj/static/js/runtime-main.7528d1cf.js.map",
+    "static/js/2.fd3e6843.chunk.js": "/iggy-week1-proj/static/js/2.fd3e6843.chunk.js",
+    "static/js/2.fd3e6843.chunk.js.map": "/iggy-week1-proj/static/js/2.fd3e6843.chunk.js.map",
+    "static/js/3.f8da3d2e.chunk.js": "/iggy-week1-proj/static/js/3.f8da3d2e.chunk.js",
+    "static/js/3.f8da3d2e.chunk.js.map": "/iggy-week1-proj/static/js/3.f8da3d2e.chunk.js.map",
+    "index.html": "/iggy-week1-proj/index.html",
+    "static/css/main.1ea95623.chunk.css.map": "/iggy-week1-proj/static/css/main.1ea95623.chunk.css.map",
+    "static/js/2.fd3e6843.chunk.js.LICENSE.txt": "/iggy-week1-proj/static/js/2.fd3e6843.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7528d1cf.js",
+    "static/js/2.fd3e6843.chunk.js",
+    "static/css/main.1ea95623.chunk.css",
+    "static/js/main.2dfd9d57.chunk.js"
+  ]
+}
