@@ -8,35 +8,44 @@ function App() {
 
     const [isUrban, setUrban] = useState(null);
 
-    const [time, setTime] = useState(null);
+    const [time, setTime] = useState(1);
     const [labels, setLabels] = useState(null);
     const [option, setOptions] = useState("bars");
 
     const [errors, setErrors] = useState(null);
     const [results, setResults] = useState(null);
 
-    const [winResult, setWinResults] = useState(null);
-
     const [win, setWin] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     function checkAnswer(check) {
         setWin(check === isUrban);
     }
 
     async function generateLocation() {
-        const location = await fetch(
-            "https://api.3geonames.org/?randomland=yes&json=1"
-        )
+        setUrban(null);
+        setWin(null);
+        const location = await fetch("https://randomuser.me/api/", {
+            headers: {
+                "Allow-Control-Access-Origin": "*",
+            },
+        })
             .then((res) => {
-                return res;
+                return res.json();
             })
             .catch((err) => {
                 console.log(err);
             });
 
         if (location) {
-            setLat(location["nearest"]["latt"] * 1);
-            setLng(location["nearest"]["longt"] * 1);
+            setLat(
+                location["results"][0]["location"]["coordinates"]["latitude"] *
+                    1
+            );
+            setLng(
+                location["results"][0]["location"]["coordinates"]["longitude"] *
+                    1
+            );
         }
 
         const result = await lookup(lat, lng, "is_urban");
@@ -50,10 +59,16 @@ function App() {
     }
 
     async function getPOI() {
+        setLoading(true);
         const lookupResult = await poi(lat, lng, option, time);
-        setResults(lookupResult[option]);
-    }
 
+        if (lookupResult["message"]) {
+            setErrors("There was none here, try again!");
+        } else {
+            setResults(lookupResult[option]);
+        }
+        setLoading(false);
+    }
     return (
         <div className="App">
             <div
@@ -71,7 +86,7 @@ function App() {
                 onClick={generateLocation}
                 style={{ marginLeft: "43%" }}
             >
-                Generate Location!
+                Generate New Location!
             </button>
             {isUrban !== null ? (
                 <div>
@@ -104,7 +119,9 @@ function App() {
                             {lng})
                         </div>
                     ) : (
-                        <div>Try again loser </div>
+                        <div style={{ textAlign: "center" }}>
+                            Woops! That was the wrong answer, try again!{" "}
+                        </div>
                     )}
                     <div
                         style={{
@@ -133,6 +150,7 @@ function App() {
                                     onChange={(e) => {
                                         setTime(e.target.value);
                                     }}
+                                    value={time}
                                 />
                             </div>
                             <div>
@@ -168,14 +186,16 @@ function App() {
                                 results.map((result) => {
                                     return <div>{result.name}</div>;
                                 })
-                            ) : results == null ? (
-                                <div />
+                            ) : errors == null ? (
+                                <div></div>
                             ) : (
                                 <div>
+                                    {" "}
                                     There were no results for these paramteres,
                                     try something else!
                                 </div>
                             )}
+                            {loading ? <div>Loading...</div> : <div />}
                         </div>
                     </div>
                 </div>
